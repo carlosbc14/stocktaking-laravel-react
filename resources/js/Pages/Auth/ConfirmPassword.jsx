@@ -1,10 +1,8 @@
 import { useEffect } from 'react';
 import GuestLayout from '@/Layouts/GuestLayout';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Head, useForm } from '@inertiajs/react';
+import { InputError } from '@/Components';
+import { Button, Input, Label } from '@/Components/ui';
+import { useForm } from '@inertiajs/react';
 import { useTraslations } from '@/Contexts/TranslationsContext';
 
 export default function ConfirmPassword() {
@@ -26,18 +24,16 @@ export default function ConfirmPassword() {
     };
 
     return (
-        <GuestLayout>
-            <Head title={__('Confirm Password')} />
-
+        <GuestLayout title={__('Confirm Password')}>
             <div className="mb-4 text-sm text-gray-600">
                 {__('This is a secure area of the application. Please confirm your password before continuing.')}
             </div>
 
             <form onSubmit={submit}>
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value={__('Password')} />
+                    <Label htmlFor="password" value={__('Password')} />
 
-                    <TextInput
+                    <Input
                         id="password"
                         type="password"
                         name="password"
@@ -51,9 +47,9 @@ export default function ConfirmPassword() {
                 </div>
 
                 <div className="flex items-center justify-end mt-4">
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <Button className="ms-4" disabled={processing}>
                         {__('Confirm')}
-                    </PrimaryButton>
+                    </Button>
                 </div>
             </form>
         </GuestLayout>

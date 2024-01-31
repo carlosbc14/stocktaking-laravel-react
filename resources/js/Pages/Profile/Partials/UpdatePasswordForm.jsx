@@ -1,14 +1,12 @@
 import { useRef } from 'react';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
+import { InputError } from '@/Components';
+import { Button, Input, Label, useToast } from '@/Components/ui';
 import { useForm } from '@inertiajs/react';
-import { Transition } from '@headlessui/react';
 import { useTraslations } from '@/Contexts/TranslationsContext';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const { __ } = useTraslations();
+    const { toast } = useToast();
     const passwordInput = useRef();
     const currentPasswordInput = useRef();
 
@@ -23,7 +21,12 @@ export default function UpdatePasswordForm({ className = '' }) {
 
         put(route('password.update'), {
             preserveScroll: true,
-            onSuccess: () => reset(),
+            onSuccess: () => {
+                toast({
+                    title: __('Saved Successfully'),
+                });
+                reset();
+            },
             onError: (errors) => {
                 if (errors.password) {
                     reset('password', 'password_confirmation');
@@ -50,9 +53,9 @@ export default function UpdatePasswordForm({ className = '' }) {
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="current_password" value={__('Current Password')} />
+                    <Label htmlFor="current_password">{__('Current Password')}</Label>
 
-                    <TextInput
+                    <Input
                         id="current_password"
                         ref={currentPasswordInput}
                         value={data.current_password}
@@ -66,9 +69,9 @@ export default function UpdatePasswordForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value={__('New Password')} />
+                    <Label htmlFor="password">{__('New Password')}</Label>
 
-                    <TextInput
+                    <Input
                         id="password"
                         ref={passwordInput}
                         value={data.password}
@@ -82,9 +85,9 @@ export default function UpdatePasswordForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password_confirmation" value={__('Confirm Password')} />
+                    <Label htmlFor="password_confirmation">{__('Confirm Password')}</Label>
 
-                    <TextInput
+                    <Input
                         id="password_confirmation"
                         value={data.password_confirmation}
                         onChange={(e) => setData('password_confirmation', e.target.value)}
@@ -96,19 +99,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                     <InputError message={__(errors.password_confirmation)} className="mt-2" />
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>{__('Save')}</PrimaryButton>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
-                    >
-                        <p className="text-sm text-gray-600">{__('Saved.')}</p>
-                    </Transition>
-                </div>
+                <Button disabled={processing}>{__('Save')}</Button>
             </form>
         </section>
     );
