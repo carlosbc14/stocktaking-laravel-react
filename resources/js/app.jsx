@@ -14,9 +14,10 @@ createInertiaApp({
     resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
     setup({ el, App, props }) {
         const root = createRoot(el);
+        console.log(props.initialPage.props);
 
         root.render(
-            <TraslationsProvider language={props.initialPage.props.language}>
+            <TraslationsProvider locale={props.initialPage.props.locale} language={props.initialPage.props.language}>
                 <App {...props} />
                 <Toaster />
             </TraslationsProvider>

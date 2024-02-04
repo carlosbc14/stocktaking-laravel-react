@@ -13,6 +13,7 @@ import {
     SheetTrigger,
 } from '@/Components/ui';
 import { SideBar } from '@/Components';
+import { LangSelect } from '@/Components/LangSelect';
 
 export default function Authenticated({ user, title, children }) {
     const { __ } = useTraslations();
@@ -39,6 +40,7 @@ export default function Authenticated({ user, title, children }) {
                             </Sheet>
 
                             <div className="flex ms-auto">
+                                <LangSelect />
                                 <div className="ms-3 relative">
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>

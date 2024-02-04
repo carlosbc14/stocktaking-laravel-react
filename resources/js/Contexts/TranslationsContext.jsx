@@ -12,7 +12,8 @@ export const useTraslations = () => {
     return context;
 };
 
-export const TraslationsProvider = ({ language, children }) => {
+export const TraslationsProvider = ({ locale, language, children }) => {
+    console.log(locale);
     const __ = (key, replace = {}) => {
         let translation = language[key] ? language[key] : key;
 
@@ -23,5 +24,5 @@ export const TraslationsProvider = ({ language, children }) => {
         return translation;
     };
 
-    return <TraslationsContext.Provider value={{ __ }}>{children}</TraslationsContext.Provider>;
+    return <TraslationsContext.Provider value={{ locale, __ }}>{children}</TraslationsContext.Provider>;
 };
