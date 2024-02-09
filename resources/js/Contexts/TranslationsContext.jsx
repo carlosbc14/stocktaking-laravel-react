@@ -13,7 +13,6 @@ export const useTraslations = () => {
 };
 
 export const TraslationsProvider = ({ locale, language, children }) => {
-    console.log(locale);
     const __ = (key, replace = {}) => {
         let translation = language[key] ? language[key] : key;
 
