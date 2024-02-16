@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\LocaleCookie;
 use Illuminate\Support\Facades\Route;
@@ -33,6 +35,9 @@ Route::middleware(LocaleCookie::class)->group(function () {
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+        Route::resource('locations', LocationController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
+        Route::resource('products', ProductController::class)->only(['index', 'create', 'store', 'edit', 'update', 'destroy']);
     });
 
     require __DIR__ . '/auth.php';

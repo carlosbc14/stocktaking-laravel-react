@@ -2,13 +2,23 @@ import { Link } from '@inertiajs/react';
 import { buttonVariants } from './ui';
 import { useTraslations } from '@/Contexts/TranslationsContext';
 import { cn } from '@/lib/utils';
-import { Home } from 'lucide-react';
+import { Home, Syringe, Warehouse } from 'lucide-react';
 
 const links = [
     {
         route: 'dashboard',
         name: 'Dashboard',
         icon: Home,
+    },
+    {
+        route: 'locations.index',
+        name: 'Warehouse Locations',
+        icon: Warehouse,
+    },
+    {
+        route: 'products.index',
+        name: 'Products',
+        icon: Syringe,
     },
 ];
 
