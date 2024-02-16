@@ -43,6 +43,11 @@ class ProductController extends Controller
             'products.*.institution' => strtolower(trans('Institution')),
         ]);
 
+        foreach ($validated['products'] as &$product) {
+            $product['created_at'] = now();
+            $product['updated_at'] = now();
+        }
+
         Product::insert($validated['products']);
 
         return redirect(route('products.index'));

@@ -43,6 +43,11 @@ class LocationController extends Controller
             'locations.*.code' => strtolower(trans('Code')),
         ]);
 
+        foreach ($validated['locations'] as &$location) {
+            $location['created_at'] = now();
+            $location['updated_at'] = now();
+        }
+
         Location::insert($validated['locations']);
 
         return redirect(route('locations.index'));
